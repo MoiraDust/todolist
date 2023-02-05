@@ -17,7 +17,18 @@ async function insertTodos(req, res) {
   }
 }
 
-// async function deleteTodo() {}
+async function deleteTodo(req, res) {
+  const id = req.params.id;
+  const todo = await todoModel.findOne({ id: id });
+  console.log("deleteTodo ", id);
+  try {
+    await todo.remove();
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err.message);
+    res.sendStatus(400);
+  }
+}
 
 async function alterTodo(req, res) {
   console.log("alterTodo");
@@ -59,6 +70,7 @@ async function getAllTodo(req, res) {
 
 module.exports = {
   insertTodos,
+  deleteTodo,
   alterTodo,
   getAllTodo,
 };
