@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
+
 const mongoose = require("mongoose");
 const MONGO_URL = "mongodb+srv://admin:admin@cluster0.zgbvtqh.mongodb.net/test";
 const port = 8080;
@@ -16,7 +16,7 @@ app.listen(port, () => {
   console.log(`port ${port} start`);
 });
 
-router.get("/test", () => {
+app.use("/test", (req, res) => {
   console.log("test connection");
   res.send({ data: "hello world" });
 });
